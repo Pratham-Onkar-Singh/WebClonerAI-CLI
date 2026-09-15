@@ -228,7 +228,7 @@ cd dashboard && npm run typecheck
 - Clone only websites and assets you are authorized to copy. Generated output is
   local, untrusted, and intentionally excluded from version control.
 
-## Resume-ready summary
+## Project summary
 
 - Built a Python website cloning agent with deterministic policy enforcement,
   action-bound approvals, IP-pinned HTTPS fetching, and structured audit logs.

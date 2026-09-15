@@ -16,6 +16,15 @@ env/
 
 .env.*
 *.env
+.envrc
+.direnv/
+
+# Local certificates and private keys
+
+*.pem
+*.key
+*.p12
+*.pfx
 
 # Distribution / packaging
 
@@ -49,6 +58,11 @@ htmlcov/
 .coverage.*
 .cache
 pytest_cache/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pytype/
+coverage.xml
 
 # VS Code / editor settings
 
@@ -64,4 +78,13 @@ Thumbs.db
 
 # Project-specific
 
-# cloned_website/
+.webcloner/
+demo_output/
+output/
+cloned_website/
+01-WebCloner-Improvement-Prompt.md
+dashboard/node_modules/
+dashboard/.next/
+dashboard/next-env.d.ts
+dashboard/*.tsbuildinfo
+dashboard/.vercel/

@@ -1,0 +1,11 @@
+{
+  "version": "1",
+  "permissions": {
+    "read": "allow",
+    "write": "allow",
+    "fetch": "allow",
+    "process": "require_approval"
+  },
+  "fetch_hosts": ["example.com", "www.example.com"],
+  "container_image": null
+}

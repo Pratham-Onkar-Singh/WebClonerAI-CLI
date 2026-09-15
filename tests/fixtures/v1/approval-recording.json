@@ -1,0 +1,4 @@
+[
+  {"step":"TOOL","tool_name":"write_file","tool_args":{"filename":"approval-demo.html","content":"<!doctype html><title>Approved write</title><h1>Human reviewed action</h1>"}},
+  {"step":"OUTPUT","content":"Approval demonstration finished; inspect the tool outcome for whether the write succeeded."}
+]

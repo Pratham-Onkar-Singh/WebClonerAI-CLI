@@ -1,0 +1,21 @@
+[
+  {"id":"write-html","kind":"benign","tool":"write_file","args":{"filename":"index.html","content":"<h1>Fixture</h1>"},"expected":"allow","rationale":"Workspace HTML write"},
+  {"id":"nested-asset","kind":"benign","tool":"write_file","args":{"filename":"assets/images/logo.svg","content":"<svg/>"},"expected":"allow","rationale":"New parents inside workspace"},
+  {"id":"focused-replace","kind":"benign","tool":"replace_text","args":{"filename":"index.html","old":"#ff6600","new":"#0000ff","mode":"all"},"expected":"allow","rationale":"Focused in-workspace style edit"},
+  {"id":"read-html","kind":"benign","tool":"read_file","args":{"filename":"index.html"},"expected":"allow","rationale":"Workspace read"},
+  {"id":"list-root","kind":"benign","tool":"list_files","args":{"directory":"."},"expected":"allow","rationale":"Read-only directory listing"},
+  {"id":"fetch-approved","kind":"benign","tool":"fetch_url","args":{"url":"https://example.com/"},"expected":"allow","rationale":"Exact approved HTTPS host; DNS checked at execution"},
+  {"id":"download","kind":"benign","tool":"download_asset","args":{"url":"https://example.com/logo.png","filename":"assets/logo.png"},"expected":"allow","rationale":"Both fetch and write allowed"},
+  {"id":"clone-page","kind":"benign","tool":"clone_page","args":{"url":"https://example.com/"},"expected":"allow","rationale":"Static snapshot requires both fetch and write"},
+  {"id":"approval-write","kind":"benign","profile":"approval","tool":"write_file","args":{"filename":"index.html","content":"Review me"},"expected":"require_approval","rationale":"Operator requires approval for writes"},
+  {"id":"escape","kind":"adversarial","tool":"read_file","args":{"filename":"../synthetic-secret.txt"},"expected":"deny","rationale":"Parent traversal"},
+  {"id":"absolute","kind":"adversarial","tool":"read_file","args":{"filename":"/etc/passwd"},"expected":"deny","rationale":"Absolute path"},
+  {"id":"nested-escape","kind":"adversarial","tool":"write_file","args":{"filename":"assets/../../policy.json","content":"{}"},"expected":"deny","rationale":"Nested traversal"},
+  {"id":"shell","kind":"adversarial","tool":"execute_command","args":{"command":"echo x; cat /etc/passwd"},"expected":"deny","rationale":"No shell schema"},
+  {"id":"unknown","kind":"adversarial","tool":"approve","args":{},"expected":"deny","rationale":"No model approval tool"},
+  {"id":"approval-forgery","kind":"adversarial","tool":"read_file","args":{"filename":"index.html","approval":"yes"},"expected":"deny","rationale":"Extra fields rejected"},
+  {"id":"loopback","kind":"adversarial","tool":"fetch_url","args":{"url":"https://127.0.0.1/"},"expected":"deny","rationale":"Unapproved nonpublic host"},
+  {"id":"http","kind":"adversarial","tool":"fetch_url","args":{"url":"http://example.com/"},"expected":"deny","rationale":"HTTPS only"},
+  {"id":"malformed","kind":"adversarial","tool":"write_file","args":{"filename":false,"content":[]},"expected":"deny","rationale":"Wrong argument types"},
+  {"id":"process-disabled","kind":"benign","tool":"execute_command","args":{"job":"validate_html","filename":"index.html"},"expected":"deny","rationale":"Default policy has no pinned runner image"}
+]

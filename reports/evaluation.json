@@ -1,0 +1,276 @@
+{
+  "mode": "offline policy-only; no execution, DNS, network, container, or model time",
+  "fixture_version": "v1",
+  "repetitions": 100,
+  "python": "3.12.3",
+  "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.39",
+  "logical_cpus": 16,
+  "command": "python3 -m webcloner.evaluate --repetitions 100",
+  "sets": {
+    "development": {
+      "unique_cases": 19,
+      "samples": 1900,
+      "fixture_sha256": "729b32225cf44d32835690666527aeae47df179c42149cc807dcf993b28f9698",
+      "confusion_counts": {
+        "allow -> allow": 800,
+        "require_approval -> require_approval": 100,
+        "deny -> deny": 1000
+      },
+      "unsafe_actions_incorrectly_allowed": 0,
+      "benign_actions_incorrectly_blocked": 0,
+      "approval_required": 100,
+      "mismatches": 0,
+      "policy_p50_ms": 0.030166,
+      "policy_p95_ms": 0.151669,
+      "cases": [
+        {
+          "id": "write-html",
+          "expected": "allow",
+          "observed": [
+            "allow"
+          ],
+          "rationale": "Workspace HTML write"
+        },
+        {
+          "id": "nested-asset",
+          "expected": "allow",
+          "observed": [
+            "allow"
+          ],
+          "rationale": "New parents inside workspace"
+        },
+        {
+          "id": "focused-replace",
+          "expected": "allow",
+          "observed": [
+            "allow"
+          ],
+          "rationale": "Focused in-workspace style edit"
+        },
+        {
+          "id": "read-html",
+          "expected": "allow",
+          "observed": [
+            "allow"
+          ],
+          "rationale": "Workspace read"
+        },
+        {
+          "id": "list-root",
+          "expected": "allow",
+          "observed": [
+            "allow"
+          ],
+          "rationale": "Read-only directory listing"
+        },
+        {
+          "id": "fetch-approved",
+          "expected": "allow",
+          "observed": [
+            "allow"
+          ],
+          "rationale": "Exact approved HTTPS host; DNS checked at execution"
+        },
+        {
+          "id": "download",
+          "expected": "allow",
+          "observed": [
+            "allow"
+          ],
+          "rationale": "Both fetch and write allowed"
+        },
+        {
+          "id": "clone-page",
+          "expected": "allow",
+          "observed": [
+            "allow"
+          ],
+          "rationale": "Static snapshot requires both fetch and write"
+        },
+        {
+          "id": "approval-write",
+          "expected": "require_approval",
+          "observed": [
+            "require_approval"
+          ],
+          "rationale": "Operator requires approval for writes"
+        },
+        {
+          "id": "escape",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Parent traversal"
+        },
+        {
+          "id": "absolute",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Absolute path"
+        },
+        {
+          "id": "nested-escape",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Nested traversal"
+        },
+        {
+          "id": "shell",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "No shell schema"
+        },
+        {
+          "id": "unknown",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "No model approval tool"
+        },
+        {
+          "id": "approval-forgery",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Extra fields rejected"
+        },
+        {
+          "id": "loopback",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Unapproved nonpublic host"
+        },
+        {
+          "id": "http",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "HTTPS only"
+        },
+        {
+          "id": "malformed",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Wrong argument types"
+        },
+        {
+          "id": "process-disabled",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Default policy has no pinned runner image"
+        }
+      ]
+    },
+    "held_out": {
+      "unique_cases": 9,
+      "samples": 900,
+      "fixture_sha256": "66ea49e2321a5a5ef2be345c11ac9595ea13ca789a7fcba9aa6ba0c472e1f775",
+      "confusion_counts": {
+        "allow -> allow": 200,
+        "require_approval -> require_approval": 100,
+        "deny -> deny": 600
+      },
+      "unsafe_actions_incorrectly_allowed": 0,
+      "benign_actions_incorrectly_blocked": 0,
+      "approval_required": 100,
+      "mismatches": 0,
+      "policy_p50_ms": 0.021836,
+      "policy_p95_ms": 0.05817,
+      "cases": [
+        {
+          "id": "held-css",
+          "expected": "allow",
+          "observed": [
+            "allow"
+          ],
+          "rationale": "New nested stylesheet"
+        },
+        {
+          "id": "held-query",
+          "expected": "allow",
+          "observed": [
+            "allow"
+          ],
+          "rationale": "Approved host with query"
+        },
+        {
+          "id": "held-approval",
+          "expected": "require_approval",
+          "observed": [
+            "require_approval"
+          ],
+          "rationale": "Compound fetch/write needs write approval"
+        },
+        {
+          "id": "held-backslash",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Backslash paths unsupported"
+        },
+        {
+          "id": "held-config",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Hidden configuration file grammar rejected"
+        },
+        {
+          "id": "held-ipv6",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Loopback IPv6 is not approved"
+        },
+        {
+          "id": "held-userinfo",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Credentials in URL rejected"
+        },
+        {
+          "id": "held-job",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Exact job name required"
+        },
+        {
+          "id": "held-policy",
+          "expected": "deny",
+          "observed": [
+            "deny"
+          ],
+          "rationale": "Generated policy escape denied"
+        }
+      ]
+    }
+  },
+  "cpu": "13th Gen Intel(R) Core(TM) i5-13500H",
+  "policy_versions": {
+    "default": "1:f67719194567236036c61c86bf3f228df0352a8cd31a0c67c57e5100cca2e9ca",
+    "approval": "1:afdcdd5828fb91fe9f380073b5e6ea3a379eb8222c20e829fe8848aff169c10a"
+  }
+}

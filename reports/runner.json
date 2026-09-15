@@ -1,0 +1,18 @@
+{
+  "mode": "real disposable containers; trusted test scripts and automated test approval; no live model",
+  "image": "python-hello-world@sha256:4427c16aaf968de7246831639a0ba54ee5346638c7b0d49717fce129253df74f",
+  "command": "python3 -m webcloner.verify_runner --image python-hello-world@sha256:4427c16aaf968de7246831639a0ba54ee5346638c7b0d49717fce129253df74f",
+  "python": "3.12.3",
+  "platform": "Linux-7.0.0-30-generic-x86_64-with-glibc2.39",
+  "checks": [
+    "fixed HTML job through dispatcher with automated trusted test approval",
+    "unprivileged UID, no socket/host file/key, loopback only, capabilities dropped, no new privileges",
+    "read-only mount",
+    "bounded output",
+    "timeout and cleanup"
+  ],
+  "time": 1789482764.9607341,
+  "docker_server": "29.7.2",
+  "status": "passed",
+  "elapsed_seconds": 4.563074829988182
+}

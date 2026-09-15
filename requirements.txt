@@ -1,0 +1,2 @@
+# Only needed for live model runs. Offline tests use the standard library.
+openai>=1.0,<3
